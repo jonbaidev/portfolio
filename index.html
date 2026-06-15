@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Jonathan Bai — Senior Frontend Developer | React, Angular, TypeScript, Micro Frontends, Cloud">
+<title>Jonathan Bai — Senior Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06060f;
+    --bg2: #0d0d1a;
+    --bg3: #12122a;
+    --surface: rgba(255,255,255,0.03);
+    --border: rgba(255,255,255,0.07);
+    --border-hover: rgba(139,92,246,0.35);
+    --text: #f0eeff;
+    --muted: rgba(240,238,255,0.45);
+    --muted2: rgba(240,238,255,0.25);
+    --accent: #8b5cf6;
+    --accent2: #3b82f6;
+    --accent3: #10b981;
+    --grad: linear-gradient(135deg, #8b5cf6, #3b82f6, #10b981);
+    --grad2: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: rgba(139,92,246,0.35); }
+
+  canvas#particles {
+    position: fixed; inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0; pointer-events: none;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(6,6,15,0.7);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    animation: fadeDown 0.7s ease both;
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: color 0.25s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  .lang-toggle {
+    display: flex; align-items: center; gap: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    overflow: hidden;
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+  .lang-btn {
+    padding: 0.35rem 0.9rem;
+    cursor: pointer; border: none; background: transparent;
+    color: var(--muted); transition: all 0.2s; font-family: var(--sans);
+    font-size: 0.78rem; font-weight: 600;
+  }
+  .lang-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 999px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative; z-index: 10;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-name {
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards;
+  }
+
+  .hero-name .grad {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-role {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 2rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  .hero-desc {
+    max-width: 560px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.65s forwards;
+  }
+
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .btn-grad {
+    padding: 0.85rem 2rem;
+    border: none; border-radius: 999px; cursor: pointer;
+    background: var(--grad2);
+    color: #fff; font-family: var(--sans); font-size: 0.9rem; font-weight: 600;
+    box-shadow: 0 0 32px rgba(139,92,246,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-grad:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 0 50px rgba(139,92,246,0.6); }
+
+  .btn-ghost {
+    padding: 0.85rem 2rem;
+    border: 1px solid var(--border-hover);
+    border-radius: 999px; cursor: pointer;
+    background: rgba(139,92,246,0.06);
+    color: var(--text); font-family: var(--sans); font-size: 0.9rem; font-weight: 500;
+    backdrop-filter: blur(8px);
+    transition: border-color 0.25s, background 0.25s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--accent); background: rgba(139,92,246,0.12); }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    color: var(--muted2); font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+    animation: bounce 2.5s infinite;
+  }
+  .hero-scroll-line {
+    width: 1px; height: 36px;
+    background: linear-gradient(to bottom, rgba(139,92,246,0.5), transparent);
+  }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 10; }
+
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 2rem; }
+
+  .section-pad { padding: 7rem 0; }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 1rem;
+  }
+
+  .section-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .about-avatar-wrap {
+    position: relative;
+    display: flex; justify-content: center;
+  }
+
+  .about-avatar {
+    width: 260px; height: 260px;
+    border-radius: 28px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-avatar::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--grad);
+    opacity: 0.08;
+  }
+
+  .avatar-ring {
+    position: absolute; inset: -12px;
+    border-radius: 38px;
+    border: 1px solid rgba(139,92,246,0.2);
+  }
+
+  .about-tag {
+    position: absolute; bottom: -1rem; right: -1rem;
+    background: var(--bg2);
+    border: 1px solid var(--border-hover);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 1rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    backdrop-filter: blur(8px);
+  }
+
+  .about-text h3 {
+    font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem;
+  }
+
+  .about-text p {
+    color: var(--muted); font-size: 0.95rem; line-height: 1.9; margin-bottom: 1rem;
+  }
+
+  .about-chips {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem;
+  }
+
+  .chip {
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  /* ── STACK ── */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .stack-card {
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    transition: transform 0.3s, border-color 0.3s, background 0.3s;
+  }
+  .stack-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-hover);
+    background: rgba(139,92,246,0.05);
+  }
+
+  .stack-card-head {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .stack-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .stack-card-title { font-size: 0.95rem; font-weight: 600; }
+  .stack-card-sub { font-size: 0.78rem; color: var(--muted); }
+
+  .skill-list {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+
+  .skill-tag {
+    padding: 0.2rem 0.65rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  /* ── EXPERIENCE ── */
+  .timeline {
+    position: relative;
+    padding-left: 2.5rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 8px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+
+  .timeline-dot {
+    position: absolute; left: -2.9rem; top: 4px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(139,92,246,0.6);
+  }
+
+  .timeline-period {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-company {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+  }
+
+  .timeline-role {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .timeline-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin-top: 0.75rem;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-hover);
+  }
+
+  .project-banner {
+    height: 120px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-banner::after {
+    content: '';
+    position: absolute; inset: 0;
+    opacity: 0.15;
+  }
+
+  .project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+
+  .project-name {
+    font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem;
+  }
+
+  .project-desc {
+    font-size: 0.85rem; color: var(--muted); line-height: 1.75;
+    flex: 1; margin-bottom: 1.25rem;
+  }
+
+  .project-footer {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+  .project-link {
+    font-size: 0.8rem; color: var(--accent);
+    text-decoration: none; font-weight: 600;
+    opacity: 0.8; transition: opacity 0.2s;
+    white-space: nowrap;
+    font-family: var(--mono);
+  }
+  .project-link:hover { opacity: 1; }
+
+  /* ── CONTACT ── */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-left h2 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; }
+  .contact-left p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 2rem; }
+
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .contact-link:hover { border-color: var(--border-hover); background: rgba(139,92,246,0.06); }
+
+  .contact-link-icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    background: rgba(139,92,246,0.12);
+    flex-shrink: 0;
+  }
+
+  .contact-link-label { font-size: 0.78rem; color: var(--muted); }
+  .contact-link-val { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .form-field label { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+
+  .form-field input,
+  .form-field textarea {
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.03);
+    color: var(--text); font-family: var(--sans); font-size: 0.9rem;
+    outline: none; transition: border-color 0.25s;
+  }
+  .form-field input:focus,
+  .form-field textarea:focus { border-color: var(--accent); }
+  .form-field textarea { resize: vertical; min-height: 120px; }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 10;
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    color: var(--muted2);
+    font-size: 0.8rem;
+    font-family: var(--mono);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(8px); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.25rem 4rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-avatar-wrap { display: none; }
+    .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .container { padding: 0 1.25rem; }
+    .section-pad { padding: 5rem 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, .reveal { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">JonBai.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about"   data-i18n="nav.about">Sobre</a></li>
+    <li><a href="#stack"   data-i18n="nav.stack">Stack</a></li>
+    <li><a href="#exp"     data-i18n="nav.exp">Experiência</a></li>
+    <li><a href="#projects" data-i18n="nav.projects">Projetos</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">Contato</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="pt">PT</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow" data-i18n="hero.eyebrow">Senior Frontend Developer · São Paulo, BR</div>
+  <h1 class="hero-name">Jonathan <span class="grad">Bai</span></h1>
+  <p class="hero-role" data-i18n="hero.role">React · Angular · TypeScript · Micro Frontends · Cloud</p>
+  <p class="hero-desc" data-i18n="hero.desc">
+    +10 anos construindo interfaces de alta performance para fintechs, bancos e produtos digitais. Especialista em arquitetura frontend, design systems e integração com IA.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn-grad" data-i18n="hero.cta1">Ver projetos</a>
+    <a href="#contact" class="btn-ghost" data-i18n="hero.cta2">Vamos conversar →</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about" class="section-pad">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-avatar-wrap reveal">
+        <div class="about-avatar">
+          🧑‍💻
+          <div class="avatar-ring"></div>
+          <div class="about-tag">10+ yrs experience</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-eyebrow reveal" data-i18n="about.eyebrow">Sobre mim</div>
+        <h2 class="section-title reveal" data-i18n="about.title">Arquiteto de experiências digitais</h2>
+        <p class="reveal reveal-delay-1" data-i18n="about.p1">
+          Sou desenvolvedor frontend sênior com mais de 10 anos de experiência, especializado em React, Angular e TypeScript. Trabalhei em fintechs como Fiserv e Banco Bradesco, liderando times e construindo soluções escaláveis do zero.
+        </p>
+        <p class="reveal reveal-delay-2" data-i18n="about.p2">
+          Tenho paixão por Micro Frontends, design systems e integração com IA. Trabalho 100% remoto, em regime PJ, com fluência em inglês (C1) e disponibilidade para projetos internacionais.
+        </p>
+        <div class="about-chips reveal reveal-delay-3">
+          <span class="chip">Remote-first 🌎</span>
+          <span class="chip">PJ / Freelance</span>
+          <span class="chip">C1 English</span>
+          <span class="chip">São Paulo, BR</span>
+          <span class="chip">Open to work ✅</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- STACK -->
+<section id="stack" class="section-pad">
+  <div class="container">
+    <div class="section-eyebrow reveal" data-i18n="stack.eyebrow">Stack técnico</div>
+    <h2 class="section-title reveal" data-i18n="stack.title">Tecnologias que domino</h2>
+    <p class="section-sub reveal" data-i18n="stack.sub">Do componente ao cluster — ferramentas que uso no dia a dia em projetos reais.</p>
+
+    <div class="stack-grid">
+
+      <div class="stack-card reveal reveal-delay-1">
+        <div class="stack-card-head">
+          <div class="stack-icon" style="background:rgba(96,165,250,0.12);">⚛️</div>
+          <div>
+            <div class="stack-card-title" data-i18n="stack.fe.title">Frontend Core</div>
+            <div class="stack-card-sub" data-i18n="stack.fe.sub">Frameworks &amp; UI</div>
+          </div>
+        </div>
+        <div class="skill-list">
+          <span class="skill-tag">React 18+</span>
+          <span class="skill-tag">Angular 17+</span>
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">TailwindCSS</span>
+          <span class="skill-tag">shadcn/ui</span>
+          <span class="skill-tag">Storybook</span>
+        </div>
+      </div>
+
+      <div class="stack-card reveal reveal-delay-2">
+        <div class="stack-card-head">
+          <div class="stack-icon" style="background:rgba(139,92,246,0.12);">🗂️</div>
+          <div>
+            <div class="stack-card-title" data-i18n="stack.state.title">State &amp; Data</div>
+            <div class="stack-card-sub" data-i18n="stack.state.sub">Gerenciamento de estado</div>
+          </div>
+        </div>
+        <div class="skill-list">
+          <span class="skill-tag">TanStack Query</span>
+          <span class="skill-tag">Zustand</span>
+          <span class="skill-tag">Redux Toolkit</span>
+          <span class="skill-tag">NgRx</span>
+          <span class="skill-tag">Zod</span>
+          <span class="skill-tag">React Hook Form</span>
+        </div>
+      </div>
+
+      <div class="stack-card reveal reveal-delay-3">
+        <div class="stack-card-head">
+          <div class="stack-icon" style="background:rgba(16,185,129,0.12);">🧩</div>
+          <div>
+            <div class="stack-card-title" data-i18n="stack.arch.title">Arquitetura</div>
+            <div class="stack-card-sub" data-i18n="stack.arch.sub">Escalabilidade &amp; padrões</div>
+          </div>
+        </div>
+        <div class="skill-list">
+          <span class="skill-tag">Micro Frontends</span>
+          <span class="skill-tag">Module Federation</span>
+          <span class="skill-tag">Design Systems</span>
+          <span class="skill-tag">Monorepo (Nx)</span>
+          <span class="skill-tag">Web Components</span>
+        </div>
+      </div>
+
+      <div class="stack-card reveal reveal-delay-1">
+        <div class="stack-card-head">
+          <div class="stack-icon" style="background:rgba(251,191,36,0.12);">☁️</div>
+          <div>
+            <div class="stack-card-title" data-i18n="stack.cloud.title">Cloud &amp; Infra</div>
+            <div class="stack-card-sub" data-i18n="stack.cloud.sub">DevOps &amp; deploy</div>
+          </div>
+        </div>
+        <div class="skill-list">
+          <span class="skill-tag">Azure</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Kubernetes</span>
+          <span class="skill-tag">Terraform</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">GitHub Actions</span>
+        </div>
+      </div>
+
+      <div class="stack-card reveal reveal-delay-2">
+        <div class="stack-card-head">
+          <div class="stack-icon" style="background:rgba(244,114,182,0.12);">🤖</div>
+          <div>
+            <div class="stack-card-title" data-i18n="stack.ai.title">AI &amp; Tooling</div>
+            <div class="stack-card-sub" data-i18n="stack.ai.sub">Integração com IA</div>
+          </div>
+        </div>
+        <div class="skill-list">
+          <span class="skill-tag">Claude API</span>
+          <span class="skill-tag">OpenAI</span>
+          <span class="skill-tag">Ollama (local)</span>
+          <span class="skill-tag">MCP Protocol</span>
+          <span class="skill-tag">LangChain</span>
+        </div>
+      </div>
+
+      <div class="stack-card reveal reveal-delay-3">
+        <div class="stack-card-head">
+          <div class="stack-icon" style="background:rgba(52,211,153,0.12);">🧪</div>
+          <div>
+            <div class="stack-card-title" data-i18n="stack.test.title">Testes &amp; Qualidade</div>
+            <div class="stack-card-sub" data-i18n="stack.test.sub">Confiabilidade</div>
+          </div>
+        </div>
+        <div class="skill-list">
+          <span class="skill-tag">Vitest</span>
+          <span class="skill-tag">Jest</span>
+          <span class="skill-tag">Playwright</span>
+          <span class="skill-tag">Cypress</span>
+          <span class="skill-tag">Testing Library</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section id="exp" class="section-pad">
+  <div class="container">
+    <div class="section-eyebrow reveal" data-i18n="exp.eyebrow">Experiência</div>
+    <h2 class="section-title reveal" data-i18n="exp.title">Trajetória profissional</h2>
+    <p class="section-sub reveal" data-i18n="exp.sub">Mais de uma década em fintechs, bancos e produtos digitais de alta escala.</p>
+
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2023 – 2026</div>
+        <div class="timeline-company">Fiserv</div>
+        <div class="timeline-role" data-i18n="exp.fiserv.role">Senior Frontend Developer</div>
+        <div class="timeline-desc" data-i18n="exp.fiserv.desc">
+          Desenvolvimento de plataformas financeiras com React e Angular, implementação de Micro Frontends com Module Federation, integração com APIs bancárias e liderança técnica de squad multidisciplinar.
+        </div>
+        <div class="timeline-tags">
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Angular</span>
+          <span class="skill-tag">Module Federation</span>
+          <span class="skill-tag">Azure</span>
+          <span class="skill-tag">TypeScript</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2022 – 2023</div>
+        <div class="timeline-company">Banco Bradesco</div>
+        <div class="timeline-role" data-i18n="exp.bradesco.role">Senior Frontend Developer</div>
+        <div class="timeline-desc" data-i18n="exp.bradesco.desc">
+          Construção de design system corporativo, acessibilidade (WCAG 2.1), e componentes de alta performance para internet banking com milhões de usuários ativos.
+        </div>
+        <div class="timeline-tags">
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Design System</span>
+          <span class="skill-tag">Storybook</span>
+          <span class="skill-tag">WCAG</span>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2016 – 2022</div>
+        <div class="timeline-company">BRD Invest</div>
+        <div class="timeline-role" data-i18n="exp.brd.role">Tech Lead · Frontend</div>
+        <div class="timeline-desc" data-i18n="exp.brd.desc">
+          6 anos como Tech Lead com ownership total do produto. Arquitetura de plataforma de investimentos do zero, liderança de time de 8 devs, decisões de infra, CI/CD e roadmap técnico.
+        </div>
+        <div class="timeline-tags">
+          <span class="skill-tag">Angular</span>
+          <span class="skill-tag">Tech Lead</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">Redux</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects" class="section-pad">
+  <div class="container">
+    <div class="section-eyebrow reveal" data-i18n="proj.eyebrow">Projetos</div>
+    <h2 class="section-title reveal" data-i18n="proj.title">Cases &amp; side projects</h2>
+    <p class="section-sub reveal" data-i18n="proj.sub">Soluções reais que construí — de POCs bancários a plataformas de marketplace.</p>
+
+    <div class="projects-grid">
+
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-banner" style="background:linear-gradient(135deg,#1a0533,#2d1b69);">🏧</div>
+        <div class="project-body">
+          <div class="project-name">VIP Lounge Kiosk</div>
+          <div class="project-desc" data-i18n="proj.vip.desc">
+            Sistema de check-in bancário com leitor NFC, chatbot local (Ollama/qwen2.5) sem internet, backend Node.js e app Android em React Native. POC para cliente bancário.
+          </div>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="skill-tag">React Native</span>
+              <span class="skill-tag">Ollama</span>
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">NFC</span>
+            </div>
+            <a href="#" class="project-link">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-banner" style="background:linear-gradient(135deg,#0c1a0e,#1a3a1a);">💼</div>
+        <div class="project-body">
+          <div class="project-name">FastFreela</div>
+          <div class="project-desc" data-i18n="proj.ff.desc">
+            Marketplace de freelancers com modelo de escrow e split payment via Asaas (Pix, boleto, cartão). Stack: Next.js, Supabase, TypeScript e TailwindCSS.
+          </div>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="skill-tag">Next.js</span>
+              <span class="skill-tag">Supabase</span>
+              <span class="skill-tag">Asaas API</span>
+            </div>
+            <a href="#" class="project-link">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-3">
+        <div class="project-banner" style="background:linear-gradient(135deg,#1a1205,#3d2a00);">🌾</div>
+        <div class="project-body">
+          <div class="project-name">Colheita — Finanças Cristãs</div>
+          <div class="project-desc" data-i18n="proj.colheita.desc">
+            App mobile em Flutter para finanças pessoais com identidade visual própria (cream/verde/ouro), Firebase, Riverpod e trilhas de estudo bíblico narradas.
+          </div>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="skill-tag">Flutter</span>
+              <span class="skill-tag">Firebase</span>
+              <span class="skill-tag">Riverpod</span>
+            </div>
+            <a href="#" class="project-link">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-banner" style="background:linear-gradient(135deg,#0a0f1e,#1a2a4a);">🤖</div>
+        <div class="project-body">
+          <div class="project-name">AI Strategy Portfolio</div>
+          <div class="project-desc" data-i18n="proj.ai.desc">
+            5 projetos Python para portfólio de IA, incluindo gerador de roadmaps técnicos via Claude API com parsing estruturado e output JSON.
+          </div>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Claude API</span>
+              <span class="skill-tag">LangChain</span>
+            </div>
+            <a href="#" class="project-link">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-banner" style="background:linear-gradient(135deg,#1a0a05,#3d1500);">🏢</div>
+        <div class="project-body">
+          <div class="project-name">Odoo CRM POC</div>
+          <div class="project-desc" data-i18n="proj.odoo.desc">
+            POC de CRM com Odoo 17 Community, módulos OCA para NF-e brasileira, validador XML e pipeline de download de notas fiscais via Docker.
+          </div>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="skill-tag">Odoo 17</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">NF-e</span>
+            </div>
+            <a href="#" class="project-link">GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal reveal-delay-3">
+        <div class="project-banner" style="background:linear-gradient(135deg,#0f0f1f,#1e1040);">📦</div>
+        <div class="project-body">
+          <div class="project-name">NZB E-commerce</div>
+          <div class="project-desc" data-i18n="proj.nzb.desc">
+            Operação de e-commerce de colecionáveis japoneses e produtos J/K-beauty via Shopee, Mercado Livre e WhatsApp, com automação de catálogos e anúncios.
+          </div>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="skill-tag">Shopee</span>
+              <span class="skill-tag">Mercado Livre</span>
+              <span class="skill-tag">Automação</span>
+            </div>
+            <a href="#" class="project-link">Ver loja →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact" class="section-pad">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="contact-left">
+        <div class="section-eyebrow reveal" data-i18n="contact.eyebrow">Contato</div>
+        <h2 class="reveal" data-i18n="contact.title">Vamos trabalhar juntos?</h2>
+        <p class="reveal" data-i18n="contact.desc">
+          Estou disponível para projetos freelance, contratação PJ ou posições remotas internacionais. Me chama!
+        </p>
+        <div class="contact-links">
+          <a href="mailto:jonbai@example.com" class="contact-link reveal">
+            <div class="contact-link-icon">📧</div>
+            <div>
+              <div class="contact-link-label">Email</div>
+              <div class="contact-link-val">jonbai@example.com</div>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/jonbai" class="contact-link reveal" target="_blank">
+            <div class="contact-link-icon">💼</div>
+            <div>
+              <div class="contact-link-label">LinkedIn</div>
+              <div class="contact-link-val">linkedin.com/in/jonbai</div>
+            </div>
+          </a>
+          <a href="https://github.com/jonbai" class="contact-link reveal" target="_blank">
+            <div class="contact-link-icon">💻</div>
+            <div>
+              <div class="contact-link-label">GitHub</div>
+              <div class="contact-link-val">github.com/jonbai</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form reveal">
+        <div class="form-row">
+          <div class="form-field">
+            <label data-i18n="form.name">Nome</label>
+            <input type="text" placeholder="Ana Silva">
+          </div>
+          <div class="form-field">
+            <label data-i18n="form.email">Email</label>
+            <input type="email" placeholder="ana@empresa.com">
+          </div>
+        </div>
+        <div class="form-field">
+          <label data-i18n="form.subject">Assunto</label>
+          <input type="text" placeholder="Oportunidade de projeto" data-i18n-placeholder="form.subject_ph">
+        </div>
+        <div class="form-field">
+          <label data-i18n="form.msg">Mensagem</label>
+          <textarea placeholder="Conta um pouco sobre o projeto..." data-i18n-placeholder="form.msg_ph"></textarea>
+        </div>
+        <button class="btn-grad" style="width:100%; margin-top:0.5rem;" data-i18n="form.send">Enviar mensagem</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span data-i18n="footer.text">Feito com 💜 por Jonathan Bai · São Paulo, BR · 2026</span>
+</footer>
+
+<script>
+/* ─── PARTICLES ─── */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, pts = [];
+
+function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+const COLS = ['139,92,246','59,130,246','16,185,129','244,114,182'];
+
+class Pt {
+  constructor() { this.init(); }
+  init() {
+    this.x = Math.random() * W; this.y = Math.random() * H;
+    this.r = Math.random() * 1.4 + 0.3;
+    this.vx = (Math.random() - 0.5) * 0.25; this.vy = (Math.random() - 0.5) * 0.25;
+    this.a = Math.random() * 0.45 + 0.08;
+    this.c = COLS[Math.random() * COLS.length | 0];
+  }
+  step() {
+    this.x += this.vx; this.y += this.vy;
+    if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.init();
+  }
+  draw() {
+    ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.c},${this.a})`; ctx.fill();
+  }
+}
+
+for (let i = 0; i < 100; i++) pts.push(new Pt());
+
+function frame() {
+  ctx.clearRect(0, 0, W, H);
+  pts.forEach(p => { p.step(); p.draw(); });
+  for (let i = 0; i < pts.length; i++)
+    for (let j = i + 1; j < pts.length; j++) {
+      const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 85) {
+        ctx.beginPath();
+        ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y);
+        ctx.strokeStyle = `rgba(139,92,246,${0.05 * (1 - d/85)})`; ctx.lineWidth = 0.5; ctx.stroke();
+      }
+    }
+  requestAnimationFrame(frame);
+}
+frame();
+
+/* ─── SCROLL REVEAL ─── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* ─── i18n ─── */
+const i18n = {
+  pt: {
+    'nav.about': 'Sobre',
+    'nav.stack': 'Stack',
+    'nav.exp': 'Experiência',
+    'nav.projects': 'Projetos',
+    'nav.contact': 'Contato',
+    'hero.eyebrow': 'Senior Frontend Developer · São Paulo, BR',
+    'hero.role': 'React · Angular · TypeScript · Micro Frontends · Cloud',
+    'hero.desc': '+10 anos construindo interfaces de alta performance para fintechs, bancos e produtos digitais. Especialista em arquitetura frontend, design systems e integração com IA.',
+    'hero.cta1': 'Ver projetos',
+    'hero.cta2': 'Vamos conversar →',
+    'about.eyebrow': 'Sobre mim',
+    'about.title': 'Arquiteto de experiências digitais',
+    'about.p1': 'Sou desenvolvedor frontend sênior com mais de 10 anos de experiência, especializado em React, Angular e TypeScript. Trabalhei em fintechs como Fiserv e Banco Bradesco, liderando times e construindo soluções escaláveis do zero.',
+    'about.p2': 'Tenho paixão por Micro Frontends, design systems e integração com IA. Trabalho 100% remoto, em regime PJ, com fluência em inglês (C1) e disponibilidade para projetos internacionais.',
+    'stack.eyebrow': 'Stack técnico',
+    'stack.title': 'Tecnologias que domino',
+    'stack.sub': 'Do componente ao cluster — ferramentas que uso no dia a dia em projetos reais.',
+    'stack.fe.title': 'Frontend Core', 'stack.fe.sub': 'Frameworks & UI',
+    'stack.state.title': 'State & Data', 'stack.state.sub': 'Gerenciamento de estado',
+    'stack.arch.title': 'Arquitetura', 'stack.arch.sub': 'Escalabilidade & padrões',
+    'stack.cloud.title': 'Cloud & Infra', 'stack.cloud.sub': 'DevOps & deploy',
+    'stack.ai.title': 'AI & Tooling', 'stack.ai.sub': 'Integração com IA',
+    'stack.test.title': 'Testes & Qualidade', 'stack.test.sub': 'Confiabilidade',
+    'exp.eyebrow': 'Experiência',
+    'exp.title': 'Trajetória profissional',
+    'exp.sub': 'Mais de uma década em fintechs, bancos e produtos digitais de alta escala.',
+    'exp.fiserv.role': 'Senior Frontend Developer',
+    'exp.fiserv.desc': 'Desenvolvimento de plataformas financeiras com React e Angular, implementação de Micro Frontends com Module Federation, integração com APIs bancárias e liderança técnica de squad multidisciplinar.',
+    'exp.bradesco.role': 'Senior Frontend Developer',
+    'exp.bradesco.desc': 'Construção de design system corporativo, acessibilidade (WCAG 2.1), e componentes de alta performance para internet banking com milhões de usuários ativos.',
+    'exp.brd.role': 'Tech Lead · Frontend',
+    'exp.brd.desc': '6 anos como Tech Lead com ownership total do produto. Arquitetura de plataforma de investimentos do zero, liderança de time de 8 devs, decisões de infra, CI/CD e roadmap técnico.',
+    'proj.eyebrow': 'Projetos',
+    'proj.title': 'Cases & side projects',
+    'proj.sub': 'Soluções reais que construí — de POCs bancários a plataformas de marketplace.',
+    'proj.vip.desc': 'Sistema de check-in bancário com leitor NFC, chatbot local (Ollama/qwen2.5) sem internet, backend Node.js e app Android em React Native. POC para cliente bancário.',
+    'proj.ff.desc': 'Marketplace de freelancers com modelo de escrow e split payment via Asaas (Pix, boleto, cartão). Stack: Next.js, Supabase, TypeScript e TailwindCSS.',
+    'proj.colheita.desc': 'App mobile em Flutter para finanças pessoais com identidade visual própria (cream/verde/ouro), Firebase, Riverpod e trilhas de estudo bíblico narradas.',
+    'proj.ai.desc': '5 projetos Python para portfólio de IA, incluindo gerador de roadmaps técnicos via Claude API com parsing estruturado e output JSON.',
+    'proj.odoo.desc': 'POC de CRM com Odoo 17 Community, módulos OCA para NF-e brasileira, validador XML e pipeline de download de notas fiscais via Docker.',
+    'proj.nzb.desc': 'Operação de e-commerce de colecionáveis japoneses e produtos J/K-beauty via Shopee, Mercado Livre e WhatsApp, com automação de catálogos e anúncios.',
+    'contact.eyebrow': 'Contato',
+    'contact.title': 'Vamos trabalhar juntos?',
+    'contact.desc': 'Estou disponível para projetos freelance, contratação PJ ou posições remotas internacionais. Me chama!',
+    'form.name': 'Nome', 'form.email': 'Email', 'form.subject': 'Assunto',
+    'form.subject_ph': 'Oportunidade de projeto',
+    'form.msg': 'Mensagem', 'form.msg_ph': 'Conta um pouco sobre o projeto...',
+    'form.send': 'Enviar mensagem',
+    'footer.text': 'Feito com 💜 por Jonathan Bai · São Paulo, BR · 2026'
+  },
+  en: {
+    'nav.about': 'About',
+    'nav.stack': 'Stack',
+    'nav.exp': 'Experience',
+    'nav.projects': 'Projects',
+    'nav.contact': 'Contact',
+    'hero.eyebrow': 'Senior Frontend Developer · São Paulo, BR',
+    'hero.role': 'React · Angular · TypeScript · Micro Frontends · Cloud',
+    'hero.desc': '10+ years building high-performance interfaces for fintechs, banks, and digital products. Expert in frontend architecture, design systems, and AI integration.',
+    'hero.cta1': 'View projects',
+    'hero.cta2': "Let's talk →",
+    'about.eyebrow': 'About me',
+    'about.title': 'Architect of digital experiences',
+    'about.p1': "I'm a senior frontend developer with 10+ years of experience, specializing in React, Angular, and TypeScript. I've worked at fintechs like Fiserv and Banco Bradesco, leading teams and building scalable solutions from scratch.",
+    'about.p2': "I'm passionate about Micro Frontends, design systems, and AI integration. I work 100% remotely as a contractor, with C1 English fluency and availability for international projects.",
+    'stack.eyebrow': 'Tech stack',
+    'stack.title': 'Technologies I master',
+    'stack.sub': 'From component to cluster — tools I use daily on real projects.',
+    'stack.fe.title': 'Frontend Core', 'stack.fe.sub': 'Frameworks & UI',
+    'stack.state.title': 'State & Data', 'stack.state.sub': 'State management',
+    'stack.arch.title': 'Architecture', 'stack.arch.sub': 'Scalability & patterns',
+    'stack.cloud.title': 'Cloud & Infra', 'stack.cloud.sub': 'DevOps & deployment',
+    'stack.ai.title': 'AI & Tooling', 'stack.ai.sub': 'AI integration',
+    'stack.test.title': 'Testing & Quality', 'stack.test.sub': 'Reliability',
+    'exp.eyebrow': 'Experience',
+    'exp.title': 'Professional journey',
+    'exp.sub': 'Over a decade at fintechs, banks, and high-scale digital products.',
+    'exp.fiserv.role': 'Senior Frontend Developer',
+    'exp.fiserv.desc': 'Development of financial platforms with React and Angular, Micro Frontends with Module Federation, banking API integration, and technical leadership of a multidisciplinary squad.',
+    'exp.bradesco.role': 'Senior Frontend Developer',
+    'exp.bradesco.desc': 'Built a corporate design system, implemented accessibility (WCAG 2.1), and delivered high-performance components for internet banking serving millions of active users.',
+    'exp.brd.role': 'Tech Lead · Frontend',
+    'exp.brd.desc': '6 years as Tech Lead with full product ownership. Architected an investment platform from scratch, led a team of 8 devs, and drove infra decisions, CI/CD, and technical roadmap.',
+    'proj.eyebrow': 'Projects',
+    'proj.title': 'Cases & side projects',
+    'proj.sub': 'Real solutions I built — from banking POCs to marketplace platforms.',
+    'proj.vip.desc': 'Banking check-in system with NFC card reader, offline local chatbot (Ollama/qwen2.5), Node.js backend, and Android app in React Native. POC for a banking client.',
+    'proj.ff.desc': 'Freelancer marketplace with escrow and split payment model via Asaas (Pix, boleto, credit card). Stack: Next.js, Supabase, TypeScript, and TailwindCSS.',
+    'proj.colheita.desc': 'Mobile app in Flutter for personal finance with custom visual identity (cream/green/gold), Firebase, Riverpod, and narrated biblical study trails.',
+    'proj.ai.desc': '5 Python projects for an AI portfolio, including a technical roadmap generator via Claude API with structured parsing and JSON output.',
+    'proj.odoo.desc': 'CRM POC with Odoo 17 Community, OCA modules for Brazilian NF-e, XML validator, and invoice download pipeline via Docker.',
+    'proj.nzb.desc': 'E-commerce operation for Japanese collectibles and J/K-beauty products via Shopee, Mercado Livre, and WhatsApp, with automated catalogs and listings.',
+    'contact.eyebrow': 'Contact',
+    'contact.title': "Let's work together?",
+    'contact.desc': "I'm available for freelance projects, contractor roles, or international remote positions. Reach out!",
+    'form.name': 'Name', 'form.email': 'Email', 'form.subject': 'Subject',
+    'form.subject_ph': 'Project opportunity',
+    'form.msg': 'Message', 'form.msg_ph': 'Tell me about the project...',
+    'form.send': 'Send message',
+    'footer.text': 'Made with 💜 by Jonathan Bai · São Paulo, BR · 2026'
+  }
+};
+
+let currentLang = 'pt';
+
+function applyLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (i18n[lang][key]) el.textContent = i18n[lang][key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.dataset.i18nPlaceholder;
+    if (i18n[lang][key]) el.placeholder = i18n[lang][key];
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+</script>
+</body>
+</html>
